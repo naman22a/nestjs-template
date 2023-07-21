@@ -17,6 +17,15 @@ export class EnvironmentVariables {
 
     @IsNotEmpty()
     CORS_ORIGIN: string;
+
+    @IsNotEmpty()
+    DB_USER: string;
+
+    @IsNotEmpty()
+    DB_PASSWORD: string;
+
+    @IsNotEmpty()
+    DB_NAME: string;
 }
 
 export function validate(config: Record<string, unknown>) {

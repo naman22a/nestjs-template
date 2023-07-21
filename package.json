@@ -21,6 +21,13 @@
         "gen:env": "gen-env-types .env -o ./typings/env.d.ts && prettier --write ./typings/env.d.ts"
     },
     "dependencies": {
+        "@mikro-orm/cli": "^5.7.13",
+        "@mikro-orm/core": "^5.7.13",
+        "@mikro-orm/migrations": "^5.7.13",
+        "@mikro-orm/nestjs": "^5.2.0",
+        "@mikro-orm/postgresql": "^5.7.13",
+        "@mikro-orm/reflection": "^5.7.13",
+        "@mikro-orm/sql-highlighter": "^1.0.1",
         "@nestjs/common": "^9.0.0",
         "@nestjs/config": "^3.0.0",
         "@nestjs/core": "^9.0.0",
@@ -70,5 +77,12 @@
         ],
         "coverageDirectory": "../coverage",
         "testEnvironment": "node"
+    },
+    "mikro-orm": {
+        "useTsNode": true,
+        "configPaths": [
+            "./src/config/mikro-orm.config.ts",
+            "./dist/config/mikro-orm.config.js"
+        ]
     }
 }
