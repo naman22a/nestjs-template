@@ -56,6 +56,6 @@ export class UsersService {
     async incrementTokenVersion(id: number) {
         const user = this.usersRepository.getReference(id);
         user.tokenVersion += 1;
-        this.em.persistAndFlush(user);
+        await this.em.persistAndFlush(user);
     }
 }
