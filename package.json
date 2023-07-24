@@ -18,7 +18,9 @@
         "test:cov": "jest --coverage",
         "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
         "test:e2e": "jest --config ./test/jest-e2e.json",
-        "gen:env": "gen-env-types .env -o ./typings/env.d.ts && prettier --write ./typings/env.d.ts"
+        "gen:env": "gen-env-types .env -o ./typings/env.d.ts && prettier --write ./typings/env.d.ts",
+        "mg:create": "npx mikro-orm migration:create",
+        "mg:up": "npx mikro-orm migration:up"
     },
     "dependencies": {
         "@mikro-orm/cli": "^5.7.13",
