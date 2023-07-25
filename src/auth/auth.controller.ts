@@ -5,7 +5,9 @@ import {
     Param,
     ParseUUIDPipe,
     Post,
+    Req,
     Res,
+    UseGuards,
 } from '@nestjs/common';
 import { UsersService } from '../shared';
 import { AuthService, MailService, TokenService } from './services';
@@ -14,7 +16,8 @@ import { LoginDto, RegisterDto } from './dto';
 import { redis } from '../common/redis';
 import { CONFIRMATION_PREFIX } from '../common/constants';
 import { AccessTokenResponse } from './types';
-import { Response } from 'express';
+import { Request, Response } from 'express';
+import { AuthGuard } from './auth.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -100,5 +103,12 @@ export class AuthController {
         } catch (error) {
             throw new InternalServerErrorException(error);
         }
+    }
+
+    @UseGuards(AuthGuard)
+    @Post('logout')
+    logout(@Res({ passthrough: true }) res: Response): OkResponse {
+        this.tokenService.sendRefreshToken(res, '');
+        return { ok: true };
     }
 }
