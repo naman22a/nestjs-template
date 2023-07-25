@@ -16,9 +16,6 @@ export class EnvironmentVariables {
     PORT: number;
 
     @IsNotEmpty()
-    CORS_ORIGIN: string;
-
-    @IsNotEmpty()
     DB_USER: string;
 
     @IsNotEmpty()
@@ -26,6 +23,12 @@ export class EnvironmentVariables {
 
     @IsNotEmpty()
     DB_NAME: string;
+
+    @IsNotEmpty()
+    REDIS_URL: string;
+
+    @IsNotEmpty()
+    CORS_ORIGIN: string;
 }
 
 export function validate(config: Record<string, unknown>) {

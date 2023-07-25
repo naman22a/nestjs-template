@@ -4,6 +4,7 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import { __prod__ } from './common/constants';
 import { ConfigService } from '@nestjs/config';
 import { EnvironmentVariables } from './config';
+import { CustomValidationPipe } from './common/pipes';
 
 async function bootstrap() {
     const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -15,6 +16,9 @@ async function bootstrap() {
     if (__prod__) {
         app.enable('trust proxy');
     }
+
+    // VALIDATION
+    app.useGlobalPipes(new CustomValidationPipe());
 
     // MIDDLEWARE
     app.enableCors({ origin, credentials: true });
