@@ -6,6 +6,7 @@ import { ConfigService } from '@nestjs/config';
 import { EnvironmentVariables } from './config';
 import { CustomValidationPipe } from './common/pipes';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import helmet from 'helmet';
 
 async function bootstrap() {
     const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -22,6 +23,7 @@ async function bootstrap() {
     app.useGlobalPipes(new CustomValidationPipe());
 
     // MIDDLEWARE
+    app.use(helmet());
     app.enableCors({ origin, credentials: true });
 
     // SWAGGER
