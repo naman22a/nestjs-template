@@ -12,9 +12,17 @@ import {
 import { UsersService } from '../shared';
 import { AuthService, MailService, TokenService } from './services';
 import { OkResponse } from '../common/interfaces';
-import { LoginDto, RegisterDto } from './dto';
+import {
+    ForgotPasswordDto,
+    LoginDto,
+    RegisterDto,
+    ResetPasswordDto,
+} from './dto';
 import { redis } from '../common/redis';
-import { CONFIRMATION_PREFIX } from '../common/constants';
+import {
+    CONFIRMATION_PREFIX,
+    FORGOT_PASSWORD_PREFIX,
+} from '../common/constants';
 import { AccessTokenResponse } from './types';
 import { Request, Response } from 'express';
 import { AuthGuard } from './auth.guard';
@@ -110,5 +118,59 @@ export class AuthController {
     logout(@Res({ passthrough: true }) res: Response): OkResponse {
         this.tokenService.sendRefreshToken(res, '');
         return { ok: true };
+    }
+
+    @Post('forgot-password')
+    async forgotPassword(
+        @Body() { email }: ForgotPasswordDto,
+    ): Promise<OkResponse> {
+        try {
+            // check if user exists
+            const user = await this.usersService.findOneByEmail(email);
+            if (!user) {
+                return { ok: true };
+            }
+
+            // send reset password email
+            const url = await this.mailService.createForgotPasswordUrl(user.id);
+            await this.mailService.sendEmail(email, url);
+
+            return { ok: true };
+        } catch (error) {
+            throw new InternalServerErrorException(error);
+        }
+    }
+
+    @Post('reset-password/:token')
+    async resetPassword(
+        @Param('token', new ParseUUIDPipe({ version: '4' })) token: string,
+        @Body() { password }: ResetPasswordDto,
+    ): Promise<OkResponse> {
+        // check if token or password is empty
+        if (!token || !password) return { ok: false };
+
+        try {
+            // check if token exists in redis
+            const userId = await redis.get(FORGOT_PASSWORD_PREFIX + token);
+            if (!userId) return { ok: false };
+
+            // check if user exists for the userId
+            const user = await this.usersService.findOneById(parseInt(userId));
+            if (!user) return { ok: false };
+
+            // update the password
+
+            const x = await this.usersService.updatePassword(user.id, password);
+
+            // check if any user's password was updated
+            if (x.affected === 0) return { ok: false };
+
+            // delete token from redis
+            await redis.del(FORGOT_PASSWORD_PREFIX + token);
+
+            return { ok: true };
+        } catch (error) {
+            throw new InternalServerErrorException(error);
+        }
     }
 }

@@ -18,3 +18,12 @@ export class LoginDto {
     @IsNotEmpty({ message: 'password is required' })
     password: string;
 }
+
+export class ForgotPasswordDto {
+    @IsEmail({}, { message: 'invalid email' })
+    email: string;
+}
+export class ResetPasswordDto {
+    @MinLength(6, { message: 'password must be atleast 6 characters long' })
+    password: string;
+}
