@@ -5,7 +5,6 @@ import {
     Param,
     ParseUUIDPipe,
     Post,
-    Req,
     Res,
     UseGuards,
 } from '@nestjs/common';
@@ -26,7 +25,9 @@ import {
 import { AccessTokenResponse } from './types';
 import { Request, Response } from 'express';
 import { AuthGuard } from './auth.guard';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('auth')
 @Controller('auth')
 export class AuthController {
     constructor(

@@ -5,6 +5,7 @@ import { __prod__ } from './common/constants';
 import { ConfigService } from '@nestjs/config';
 import { EnvironmentVariables } from './config';
 import { CustomValidationPipe } from './common/pipes';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
     const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -22,6 +23,14 @@ async function bootstrap() {
 
     // MIDDLEWARE
     app.enableCors({ origin, credentials: true });
+
+    // SWAGGER
+    const config = new DocumentBuilder()
+        .setTitle('NestJS Template')
+        .setVersion('1.0')
+        .build();
+    const document = SwaggerModule.createDocument(app, config);
+    SwaggerModule.setup('docs', app, document);
 
     await app.listen(port);
 }
