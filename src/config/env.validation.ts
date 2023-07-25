@@ -25,10 +25,19 @@ export class EnvironmentVariables {
     DB_NAME: string;
 
     @IsNotEmpty()
+    ACCESS_TOKEN_SECRET: string;
+
+    @IsNotEmpty()
+    REFRESH_TOKEN_SECRET: string;
+
+    @IsNotEmpty()
     REDIS_URL: string;
 
     @IsNotEmpty()
     CORS_ORIGIN: string;
+
+    @IsNotEmpty()
+    COOKIE_DOMAIN: string;
 }
 
 export function validate(config: Record<string, unknown>) {

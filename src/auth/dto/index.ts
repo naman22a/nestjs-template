@@ -10,3 +10,11 @@ export class RegisterDto {
     @MinLength(6, { message: 'password must be atleast 6 characters long' })
     password: string;
 }
+
+export class LoginDto {
+    @IsEmail({}, { message: 'invalid email' })
+    email: string;
+
+    @IsNotEmpty({ message: 'password is required' })
+    password: string;
+}
