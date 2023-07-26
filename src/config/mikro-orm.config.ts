@@ -7,9 +7,7 @@ import { __prod__ } from '../common/constants';
 
 const config: Options = {
     type: 'postgresql',
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    dbName: process.env.DB_NAME,
+    clientUrl: process.env.DB_URL,
 
     entities: ['dist/**/*.model.js'],
     entitiesTs: ['./src/**/*.model.ts'],

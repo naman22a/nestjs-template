@@ -1,5 +1,11 @@
 import { plainToInstance } from 'class-transformer';
-import { IsEnum, IsNotEmpty, IsNumber, validateSync } from 'class-validator';
+import {
+    IsEnum,
+    IsNotEmpty,
+    IsNumber,
+    Matches,
+    validateSync,
+} from 'class-validator';
 
 enum Environment {
     Development = 'development',
@@ -15,14 +21,10 @@ export class EnvironmentVariables {
     @IsNumber()
     PORT: number;
 
-    @IsNotEmpty()
-    DB_USER: string;
-
-    @IsNotEmpty()
-    DB_PASSWORD: string;
-
-    @IsNotEmpty()
-    DB_NAME: string;
+    @Matches(
+        /^postgresql:\/\/([^:]+):([^@]+)@([^:\/]+):(\d+)\/([^?]+)\?schema=([^&]+)$/,
+    )
+    DB_URL: string;
 
     @IsNotEmpty()
     ACCESS_TOKEN_SECRET: string;
