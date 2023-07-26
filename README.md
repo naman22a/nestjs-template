@@ -8,17 +8,17 @@
 
 ## Features covered
 
--   📌 NestJS — latest version
--   🎉 TypeScript - Type checking
+-   📌 NestJS
+-   🎉 TypeScript
 -   🏡 REST API
--   🔐 Authentication - JWT, RSA256, Access and Refresh tokens
+-   🔐 Authentication - JWT with Access and Refresh tokens
 -   📅 MikroORM - Database ORM
 -   🐘 PostgreSQL - Open-Source Relational Database
 -   🧠 Configuration - Single config folder for all
 -   ⚙️ Dotenv - Supports environment variables
 -   📃 Swagger - API Documentation
 -   ⛑️ Helmet - secure HTTP headers
--   📏 ESLint — Pluggable JavaScript linter
+-   📏 ESLint - Pluggable JavaScript linter
 -   🦋 Prettier - Opinionated Code Formatter
 
 ## File Structure
