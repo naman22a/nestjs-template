@@ -2,15 +2,20 @@
 
 [Nest JS Template](https://github.com/namanarora1022/nestjs-template) is a starter repository for my personal Nest JS projects.
 
+## API Endpoints
+
+![swagger api endpoints](./assets/swagger.png)
+
 ## Features covered
 
--   📱 NestJS — latest version
+-   📌 NestJS — latest version
 -   🎉 TypeScript - Type checking
--   ⚙️ Dotenv - Supports environment variables
+-   🏡 REST API
 -   🔐 Authentication - JWT, RSA256, Access and Refresh tokens
--   🏪 MikroORM - Database ORM
--   🏪 PostgreSQL - Open-Source Relational Database
--   🧠 Configuration - Single config for all
+-   📅 MikroORM - Database ORM
+-   🐘 PostgreSQL - Open-Source Relational Database
+-   🧠 Configuration - Single config folder for all
+-   ⚙️ Dotenv - Supports environment variables
 -   📃 Swagger - API Documentation
 -   ⛑️ Helmet - secure HTTP headers
 -   📏 ESLint — Pluggable JavaScript linter
