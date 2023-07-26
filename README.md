@@ -106,4 +106,4 @@ $ yarn run test:cov
 
 ## License
 
-Nest is [MIT licensed](LICENSE).
+Nest JS Template is [MIT licensed](LICENSE).
