@@ -42,7 +42,7 @@ nestjs-template
 |     │       └── dto                             * Data Transfer Objects.
 |     │       └── index.ts                        * Re exports some important files
 |     │       └── <module>.model.ts               * Entity file for <module>
-|     │       └── <module>.model.ts               * Controller file for <module>
+|     │       └── <module>.controller.ts          * Controller file for <module>
 |     │       └── <module>.module.ts              * root module file for module
 |     │       └── <module>.service.ts             * Service file for <module>
 │   └── shared                                    * All shared modules are stored here
